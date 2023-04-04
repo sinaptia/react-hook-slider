@@ -1,5 +1,8 @@
 # react-hook-slider
 
+## Description
+
+An horizontal slider using [React](https://react.dev) hooks that allows to have full control over the design and behavior of the component, simple and easy to use.
 ### Installation
 
 #### yarn
@@ -12,71 +15,8 @@
 
 ## Usage
 
-This is a simplified example of the library usage. The <Slider> component is designed to be reusable throughout the application while maintaining a consistent design structure. It has the ability to receive different types of child components.
+The hook returns an object with properties that allow the slider to be controlled: a `ref` to the slider element, a `scrollTo` function to scroll the slider left or right, a `scrollStatus` variable that represents the current scroll position of the slider and `isOverflown`, a function that indicates whether or not the slider content is overflowing its container, in my case this was used to hide or show the slider arrows when there are no enough elements on the list to do the scroll action.
 
-```js
-import React, { Children, useRef } from "react";
-import { useSlider } from "react-hook-slider";
-import { Box, Grid, Button } from "theme-ui";
+See it in action [here](https://codesandbox.io/s/affectionate-panna-3iwn3q?file=/src/App.js)
 
-const Slider = ({ children, sx, className }) => {
-  const { sliderRef, scrollStatus, scrollTo } = useSlider({ hasPadding: true });
-
-  const containerRef = useRef(null);
-  const showButtons = true;
-
-  return (
-    <Box
-    sx={{
-      position: "relative",
-      ...sx,
-    }}
-    ref={containerRef}
-    className={className}
-  >
-    <Grid
-      sx={{
-        overflowX: "auto",
-        width: "full",
-        scrollSnapType: "x mandatory",
-        scrollbarWidth: "none",
-        "&::-webkit-scrollbar": {
-          display: "none",
-        },
-        gridAutoFlow: "column",
-        gridAutoColumns: "max-content",
-      }}
-      ref={sliderRef}
-    >
-      {Children.map(children, (child, index) => (
-        <Box key={index} sx={{ scrollSnapAlign: "center", maxWidth: "90vw" }}>
-          {child}
-        </Box>
-      ))}
-    </Grid>
-    {showButtons && (
-      <Box>
-        <Button onClick={scrollTo('left')} disabled={scrollStatus === "left"}>Scroll left</Button>
-        <Button onClick={scrollTo('right')} disabled={scrollStatus === "right"}>Scroll right</Button>
-      </Box>
-    )}
-  </Box>
-  );
-};
-
-export default Slider;
-```
-
-This code snippet is an example of how the <Slider> component can be used across the app. The <SimpleCard> components are passed as children to the component, which will handle the layout and scrolling of the cards ensuring consistency in the design and behavior while also having the flexibility to use different types of children.
-
-```js
-<Slider>
-  {ActivityList.map((activity) => (
-    <SimpleCard
-      numberOfAdults={activity.numberOfAdults}
-      numberOfChildren={activity.numberOfChildren}
-      title={activity.title}
-    />
-  ))}
-</Slider>
-```
+Contributions to our [GitHub](https://github.com/sinaptia/react-hook-slider) are welcome.

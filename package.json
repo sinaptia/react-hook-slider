@@ -1,6 +1,6 @@
 {
   "name": "react-hook-slider",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Custom horizontal slider with full control over design",
   "main": "index.js",
   "repository": {
