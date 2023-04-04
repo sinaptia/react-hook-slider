@@ -1,0 +1,25 @@
+{
+  "name": "react-hook-slider",
+  "version": "1.0.0",
+  "description": "Custom horizontal slider with full control over design",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sinaptia/react-hook-slider.git"
+  },
+  "keywords": [
+    "react",
+    "hook",
+    "slider"
+  ],
+  "author": "Lucas Belenda",
+  "license": "GNU GENERAL PUBLIC LICENSE",
+  "bugs": {
+    "url": "https://github.com/sinaptia/react-hook-slider/issues"
+  },
+  "homepage": "https://github.com/sinaptia/react-hook-slider#readme",
+  "dependencies": {
+    "debounce": "^1.2.1",
+    "react": "^18.2.0"
+  }
+}
