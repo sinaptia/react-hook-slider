@@ -1,18 +1,35 @@
 import { useEffect, useRef, useState } from "react";
 import { debounce } from "debounce";
 
+function determinateScrollDistance(slider,  {amount, hasPadding}) {
+  const childIndex = hasPadding ? 1 : 0;
+  
+  // `amount` determinate the amount of pixels to scroll, but with a specific behavior:
+  // - If `amount` is 0, it will scroll the width of the slider.
+  // - If `amount` is not defined, it will scroll the width of the first child.
+  // - If `amount` is defined, it will scroll the amount of pixels specified.
+  if (amount === 0) return slider.offsetWidth;
+  
+  if (!amount) return slider.children[childIndex].offsetWidth
+
+  return amount;
+}
+  
+
 function useSlider({ hasPadding = false } = {}) {
   const sliderRef = useRef(null);
   const [scrollStatus, setScrollStatus] = useState(null);
 
-  const scrollTo = (direction) => () => {
+  const scrollTo = (direction, {
+    amount
+  }) => () => {
     const slider = sliderRef.current;
-    const childIndex = hasPadding ? 1 : 0;
+
     slider.scrollBy({
-      left:
-        direction === "right"
-          ? slider.children[childIndex].offsetWidth
-          : -slider.children[childIndex].offsetWidth,
+      left: 
+        direction === "left"
+          ? -determinateScrollDistance(slider, {amount, hasPadding})
+          : determinateScrollDistance(slider, {amount, hasPadding}),
       behavior: "smooth",
     });
   };
